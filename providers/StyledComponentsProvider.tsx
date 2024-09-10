@@ -4,7 +4,7 @@ import { useServerInsertedHTML } from "next/navigation";
 import { ServerStyleSheet, StyleSheetManager } from "styled-components";
 import React, { PropsWithChildren, useState } from "react";
 
-export default function StyledComponentsRegistry({
+export default function StyledComponentsProvider({
   children,
 }: PropsWithChildren) {
   const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
