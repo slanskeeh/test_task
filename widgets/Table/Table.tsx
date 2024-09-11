@@ -10,6 +10,7 @@ import {
   TableTable,
   TableWrapper,
 } from "./components";
+import Pagination from "@/entities/Pagination/Pagination";
 
 interface TableDataItem {
   id: number;
@@ -18,11 +19,22 @@ interface TableDataItem {
   params: string;
 }
 
+const ITEMS_PER_PAGE = 6;
+
 const Table = ({ data }: { data: TableDataItem[] }) => {
   if (!data) return;
   const [items, setItems] = useState<TableDataItem[]>(data);
   const [draggingItemId, setDraggingItemId] = useState<number | null>(null);
   const [searchFilter, setSearchFilter] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
+  const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
+  const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   const dragImageRef = useRef<HTMLElement | null>(null);
 
@@ -89,6 +101,18 @@ const Table = ({ data }: { data: TableDataItem[] }) => {
     }
   }, [searchFilter]);
 
+  const tableItems = items.map((item, index) => (
+    <TableItem
+      key={index}
+      isDragging={draggingItemId === item.id}
+      onDragStart={handleDragStart}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
+      data={item}
+      deleteItem={handleDelete}
+    />
+  ));
+
   return (
     <>
       <TableWrapper>
@@ -102,19 +126,14 @@ const Table = ({ data }: { data: TableDataItem[] }) => {
             </TableHeadRow>
           </thead>
           <TableBody>
-            {items.map((item) => (
-              <TableItem
-                key={item.id}
-                isDragging={draggingItemId === item.id}
-                onDragStart={handleDragStart}
-                onDragOver={handleDragOver}
-                onDrop={handleDrop}
-                data={item}
-                deleteItem={handleDelete}
-              />
-            ))}
+            {tableItems.slice(indexOfFirstItem, indexOfLastItem)}
           </TableBody>
         </TableTable>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          handlePageChange={handlePageChange}
+        />
       </TableWrapper>
     </>
   );
