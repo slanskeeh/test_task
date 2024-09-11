@@ -129,11 +129,13 @@ const Table = ({ data }: { data: TableDataItem[] }) => {
             {tableItems.slice(indexOfFirstItem, indexOfLastItem)}
           </TableBody>
         </TableTable>
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          handlePageChange={handlePageChange}
-        />
+        {tableItems.length > 0 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            handlePageChange={handlePageChange}
+          />
+        )}
       </TableWrapper>
     </>
   );
