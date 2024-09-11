@@ -48,9 +48,9 @@ const Cross = styled.div`
   }
 `;
 
-const ButtonDelete = ({}: {}) => {
+const ButtonDelete = ({ handler }: { handler: () => void }) => {
   return (
-    <Button>
+    <Button onClick={handler}>
       <Cross />
     </Button>
   );

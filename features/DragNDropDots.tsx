@@ -9,7 +9,7 @@ const Dot = styled.span`
   background-color: #6e7b97;
 `;
 
-const DotsGrid = styled.div`
+const DotsGrid = styled.div<{ $isActive?: boolean }>`
   cursor: pointer;
   display: grid;
   gap: 3px;
@@ -20,11 +20,15 @@ const DotsGrid = styled.div`
 
   align-content: center;
   justify-content: center;
+
+  & > * {
+    ${(props) => (props.$isActive ? `background-color: #5F9CF7;` : "")}
+  }
 `;
 
-const DragNDropDots = () => {
+const DragNDropDots = ({ isActive = false }: { isActive?: boolean }) => {
   return (
-    <DotsGrid>
+    <DotsGrid $isActive={isActive}>
       <Dot />
       <Dot />
       <Dot />

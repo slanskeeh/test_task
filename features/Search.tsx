@@ -3,7 +3,7 @@
 import { ChangeEvent, useRef, useState } from "react";
 import styled from "styled-components";
 
-const SearchWrapper = styled.div<{ inFocus: boolean }>`
+const SearchWrapper = styled.div<{ $inFocus: boolean }>`
   cursor: pointer;
   min-width: 216px;
   min-height: 44px;
@@ -17,7 +17,7 @@ const SearchWrapper = styled.div<{ inFocus: boolean }>`
   transition: 0.2s;
 
   outline: ${(props) =>
-    props.inFocus ? "#a0a0a0 solid 1px" : "#f9f9f9 solid 1px"};
+    props.$inFocus ? "#a0a0a0 solid 1px" : "#f9f9f9 solid 1px"};
   &:hover {
     outline: #d0d0d0 solid 1px;
   }
@@ -43,7 +43,11 @@ const SearchInput = styled.input`
   }
 `;
 
-const Search = () => {
+const Search = ({
+  setSearchValue,
+}: {
+  setSearchValue: (value: string) => void;
+}) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isInputInFocus, setIsInputInFocus] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
@@ -51,11 +55,12 @@ const Search = () => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setValue(value);
+    setSearchValue(value);
   };
 
   return (
     <SearchWrapper
-      inFocus={isInputInFocus}
+      $inFocus={isInputInFocus}
       onClick={() => {
         inputRef?.current && inputRef.current.focus();
       }}
