@@ -15,6 +15,11 @@ const DotsGrid = styled.div`
   gap: 3px;
   grid-template-columns: repeat(2, 4px);
   grid-template-rows: repeat(3, 4px);
+  width: 24px;
+  height: 24px;
+
+  align-content: center;
+  justify-content: center;
 `;
 
 const DragNDropDots = () => {

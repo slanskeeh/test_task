@@ -1,9 +1,9 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import styled from "styled-components";
 
-const SearchWrapper = styled.div`
+const SearchWrapper = styled.div<{ inFocus: boolean }>`
   cursor: pointer;
   min-width: 216px;
   min-height: 44px;
@@ -13,6 +13,14 @@ const SearchWrapper = styled.div`
   gap: 10px;
   border-radius: 12px;
   background-color: #f9f9f9;
+
+  transition: 0.2s;
+
+  outline: ${(props) =>
+    props.inFocus ? "#a0a0a0 solid 1px" : "#f9f9f9 solid 1px"};
+  &:hover {
+    outline: #d0d0d0 solid 1px;
+  }
 `;
 
 const SearchIcon = styled.span`
@@ -23,6 +31,7 @@ const SearchIcon = styled.span`
 `;
 
 const SearchInput = styled.input`
+  background-color: transparent;
   width: fit-content;
   outline: none;
   border: none;
@@ -35,6 +44,8 @@ const SearchInput = styled.input`
 `;
 
 const Search = () => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [isInputInFocus, setIsInputInFocus] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +54,12 @@ const Search = () => {
   };
 
   return (
-    <SearchWrapper>
+    <SearchWrapper
+      inFocus={isInputInFocus}
+      onClick={() => {
+        inputRef?.current && inputRef.current.focus();
+      }}
+    >
       <SearchIcon>
         <svg
           width="24"
@@ -58,7 +74,14 @@ const Search = () => {
           />
         </svg>
       </SearchIcon>
-      <SearchInput placeholder="Поиск" value={value} onChange={handleChange} />
+      <SearchInput
+        ref={inputRef}
+        placeholder="Поиск"
+        value={value}
+        onChange={handleChange}
+        onFocus={() => setIsInputInFocus(true)}
+        onBlur={() => setIsInputInFocus(false)}
+      />
     </SearchWrapper>
   );
 };
