@@ -35,7 +35,7 @@ const TableRow = styled.tr<{ $visibility: boolean; $isDragging: boolean }>`
 
   @media screen and (max-width: 560px) {
     grid-template-columns:
-      minmax(150px, 1.5fr) minmax(80px, 2fr) minmax(70px, 2fr)
+      minmax(170px, 1.5fr) minmax(80px, 2fr) minmax(60px, 2fr)
       24px;
   }
 `;
