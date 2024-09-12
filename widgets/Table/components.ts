@@ -15,6 +15,18 @@ export const TableWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  overflow: hidden;
+
+  @media screen and (max-width: 560px) {
+    padding: 30px 16px 30px 16px;
+    height: 680px;
+  }
+`;
+
+export const TableHead = styled.thead`
+  width: 100%;
+  display: flex;
 `;
 
 export const TableHeadRow = styled.tr`
@@ -29,7 +41,7 @@ export const TableHeadRow = styled.tr`
 
   border-radius: 12px;
 
-  width: 100%;
+  /* width: 100%; */
 
   th {
     &:first-child {
@@ -57,6 +69,8 @@ export const TableTable = styled.table`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  overflow-x: scroll;
+  width: 100%;
 `;
 
 export const TableBody = styled.tbody`

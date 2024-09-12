@@ -5,6 +5,7 @@ import Search from "@/features/Search";
 import { useEffect, useRef, useState } from "react";
 import {
   TableBody,
+  TableHead,
   TableHeader,
   TableHeadRow,
   TableTable,
@@ -118,13 +119,13 @@ const Table = ({ data }: { data: TableDataItem[] }) => {
       <TableWrapper>
         <Search setSearchValue={setSearchFilter} />
         <TableTable>
-          <thead>
+          <TableHead>
             <TableHeadRow>
               <TableHeader>Товар</TableHeader>
               <TableHeader>Параметры</TableHeader>
               <TableHeader>Видимость</TableHeader>
             </TableHeadRow>
-          </thead>
+          </TableHead>
           <TableBody>
             {tableItems.slice(indexOfFirstItem, indexOfLastItem)}
           </TableBody>

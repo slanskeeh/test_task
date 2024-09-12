@@ -16,15 +16,12 @@ const Pagination = ({
 }) => {
   return (
     <PaginationWrapper>
-      {/* Кнопка "предыдущая страница" */}
       <PaginationArrowButton
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
-      >
-        Предыдущая
-      </PaginationArrowButton>
+        $direction={"prev"}
+      />
 
-      {/* Показать номера страниц */}
       <PaginationPagesWrapper>
         {Array.from({ length: totalPages }, (_, index) => index + 1).map(
           (page) => (
@@ -39,13 +36,11 @@ const Pagination = ({
         )}
       </PaginationPagesWrapper>
 
-      {/* Кнопка "следующая страница" */}
       <PaginationArrowButton
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-      >
-        Следующая
-      </PaginationArrowButton>
+        $direction={"next"}
+      />
     </PaginationWrapper>
   );
 };
