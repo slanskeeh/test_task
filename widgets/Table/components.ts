@@ -69,7 +69,7 @@ export const TableTable = styled.table`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  overflow-x: scroll;
+  overflow-x: auto;
   width: 100%;
 `;
 
