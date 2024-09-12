@@ -19,7 +19,9 @@ export const TableWrapper = styled.div`
 
 export const TableHeadRow = styled.tr`
   display: grid;
-  grid-template-columns: 1.5fr 2fr 2fr 40px;
+  grid-template-columns:
+    minmax(200px, 1.5fr) minmax(120px, 2fr) minmax(100px, 2fr)
+    40px;
   gap: 12px;
 
   background-color: #f9f9f9;
@@ -33,6 +35,12 @@ export const TableHeadRow = styled.tr`
     &:first-child {
       padding-left: 44px;
     }
+  }
+
+  @media screen and (max-width: 560px) {
+    grid-template-columns:
+      minmax(150px, 1.5fr) minmax(80px, 2fr) minmax(70px, 2fr)
+      24px;
   }
 `;
 

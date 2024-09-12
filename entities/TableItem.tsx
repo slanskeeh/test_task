@@ -9,7 +9,9 @@ import styled from "styled-components";
 
 const TableRow = styled.tr<{ $visibility: boolean; $isDragging: boolean }>`
   display: grid;
-  grid-template-columns: 1.5fr 2fr 2fr 40px;
+  grid-template-columns:
+    minmax(200px, 1.5fr) minmax(120px, 2fr) minmax(100px, 2fr)
+    40px;
   gap: 12px;
   transition: 0.2s;
   opacity: ${(props) => (props.$visibility ? "1" : "0.3")};
@@ -30,21 +32,40 @@ const TableRow = styled.tr<{ $visibility: boolean; $isDragging: boolean }>`
     z-index: 1000;
     transform: scale(0.99 );
   `}
+
+  @media screen and (max-width: 560px) {
+    grid-template-columns:
+      minmax(150px, 1.5fr) minmax(80px, 2fr) minmax(70px, 2fr)
+      24px;
+  }
 `;
 
 const TableItemInfoWrapper = styled.td`
   display: flex;
   gap: 20px;
   align-items: center;
+
+  @media screen and (max-width: 560px) {
+    gap: 16px;
+  }
 `;
 
 const TableItemText = styled.p`
   font-size: 14px;
   line-height: 16px;
   font-weight: 500;
-  margin-left: -8px;
 
-  max-width: 150px;
+  width: fit-content;
+
+  @media screen and (max-width: 560px) {
+    font-size: 12px;
+  }
+`;
+
+const TableRowContent = styled.td`
+  display: flex;
+  justify-content: start;
+  width: 100%;
 `;
 
 const TableItem = ({
@@ -85,17 +106,19 @@ const TableItem = ({
         <TableItemInfoWrapper>
           <DragNDropDots isActive={isDragging} />
           <Icon src={data.icon} />
-          <TableItemText>{cropTextContent(data.name)}</TableItemText>
+          <TableItemText style={{ marginLeft: "-8px" }}>
+            {cropTextContent(data.name)}
+          </TableItemText>
         </TableItemInfoWrapper>
-        <td>
+        <TableRowContent>
           <TableItemText>{cropTextContent(data.params)}</TableItemText>
-        </td>
-        <td>
+        </TableRowContent>
+        <TableRowContent>
           <Toggle checked={visibility} onChange={setVisibility} />
-        </td>
-        <td>
+        </TableRowContent>
+        <TableRowContent>
           <ButtonDelete handler={() => deleteItem(data.id)} />
-        </td>
+        </TableRowContent>
       </TableRow>
     </>
   );

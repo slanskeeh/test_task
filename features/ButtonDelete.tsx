@@ -14,12 +14,22 @@ const Button = styled.button`
   border: none;
 
   cursor: pointer;
+
+  @media screen and (max-width: 560px) {
+    width: 24px;
+    height: 24px;
+  }
 `;
 
 const Cross = styled.div`
   width: 12px;
   height: 12px;
   position: relative;
+
+  @media screen and (max-width: 560px) {
+    width: 7px;
+    height: 7px;
+  }
 
   &::before {
     content: "";
@@ -32,6 +42,11 @@ const Cross = styled.div`
     left: 50%;
     transform: translate(-50%, -50%) rotate(45deg);
     background-color: #f93c47;
+
+    @media screen and (max-width: 560px) {
+      width: 10px;
+      height: 1px;
+    }
   }
 
   &::after {
@@ -45,6 +60,11 @@ const Cross = styled.div`
     left: 50%;
     transform: translate(-50%, -50%) rotate(-45deg);
     background-color: #f93c47;
+
+    @media screen and (max-width: 560px) {
+      width: 10px;
+      height: 1px;
+    }
   }
 `;
 
